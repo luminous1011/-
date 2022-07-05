@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //创建链表
+        const cycle = {
+            data: 1,
+            next: {
+                data: 2,
+                next: {
+                    data: 3,
+                    next: {
+                        data: 4,
+                        next: {
+                            data: 5,
+                            next: {
+                                data: 6,
+                                next: {
+                                    data: 7,
+                                    next: {
+                                        data: 8,
+                                        next:null
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        const reverseList = function (head) {
+            if (!head) return null
+            let pre = null, cur = head
+            while (cur) {
+                [cur.next, pre, cur] = [pre, cur, cur.next]
+                // let next = cur.next
+                // cur.next = pre
+                // pre = cur
+                // cur = next
+            }
+            return pre
+        }
+        // console.log(reverseList(cycle));
+
+
+        function ListNode(val, next) {
+            this.val = (val === undefined ? 0 : val)
+            this.next = (next === undefined ? null : next)
+        }
+        function reverseBetween(hair, left, right) {
+            if (!hair) return null
+            let ret = new ListNode(-1, hair), pre = ret, cnt = right - left + 1
+            console.log(cnt);   
+            while (--left) {
+                pre = pre.next
+            }
+            pre.next = reverse(pre.next, cnt)
+            return pre.next
+        }
+        function reverse(head, n) {
+            let pre = null, cur = head
+            while (n--) {
+                [cur.next, pre, cur] = [pre, cur, cur.next]
+            }
+            head.next = cur
+            // console.log(head.next,pre);
+            return pre
+        }
+        console.log(reverseBetween(cycle,2,5));
+    </script>
+</body>
+
+</html>
