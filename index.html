@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //创建链表
+
+        const cycle = {
+            data: 1,
+            next: {
+                data: 2,
+                next: {
+                    data: 3,
+                    next: {
+                        data: 4,
+                        next: {
+                            data: 5,
+                            next: {
+                                data: 6,
+                                next: {
+                                    data: 7,
+                                    next: {
+                                        data: 8,
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        cycle.next.next.next.next.next.next.next = cycle.next.next
+        //判断是否为环形链表
+        const hasCycle = function (head) {
+            if (!head) return false//判断是否为空
+            let pre = head, cur = head
+            while (cur && cur.next) {//避免造成空指针异常
+                pre = pre.next
+                cur = cur.next.next
+                if (pre === cur) {
+                    return true
+                }
+            }
+            return false
+        }
+
+
+        //判断环形入口
+        const startCycle = function (head) {
+            if (!head) return null
+            let pre = head, cur = head
+            while (cur && cur.next) {
+                pre = pre.next
+                cur = cur.next.next
+                if (pre === cur) {
+                    let temp = head
+                    while (temp !== pre) {
+                        pre = pre.next
+                        temp = temp.next
+                    }
+                    return pre
+                }
+            }
+            return null
+        }
+
+        console.log('是否为环形链表',
+            hasCycle(cycle)
+        );
+        console.log('环形链入口',
+        startCycle(cycle)
+        );
+    </script>
+</body>
+
+</html>
