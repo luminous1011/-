@@ -60,12 +60,12 @@
         function reverseBetween(hair, left, right) {
             if (!hair) return null
             let ret = new ListNode(-1, hair), pre = ret, cnt = right - left + 1
-            console.log(cnt);   
             while (--left) {
                 pre = pre.next
             }
             pre.next = reverse(pre.next, cnt)
-            return pre.next
+            console.log(ret);
+            return ret.next
         }
         function reverse(head, n) {
             let pre = null, cur = head
@@ -76,7 +76,7 @@
             // console.log(head.next,pre);
             return pre
         }
-        console.log(reverseBetween(cycle,2,5));
+        console.log(reverseBetween(cycle,2,3));
     </script>
 </body>
 

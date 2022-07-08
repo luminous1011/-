@@ -36,18 +36,22 @@
                 }
             }
         }
-        
+
         cycle.next.next.next.next.next.next.next = cycle.next.next
         //判断是否为环形链表
         const hasCycle = function (head) {
             if (!head) return false//判断是否为空
-            let pre = head, cur = head
+            let pre = head//慢指针
+            let cur = head//快指针
             while (cur && cur.next) {//避免造成空指针异常
-                pre = pre.next
-                cur = cur.next.next
+                pre = pre.next//慢指针一次走1步
+                cur = cur.next.next//慢指针一次走2步
+
                 if (pre === cur) {
+                    //当快指针与慢指针相遇时，则为环形链表
                     return true
                 }
+                
             }
             return false
         }
@@ -76,7 +80,7 @@
             hasCycle(cycle)
         );
         console.log('环形链入口',
-        startCycle(cycle)
+            startCycle(cycle)
         );
     </script>
 </body>
